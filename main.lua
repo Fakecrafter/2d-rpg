@@ -1,17 +1,22 @@
-
-push = require 'src/push'
-
 window_width = love.graphics.getPixelWidth()
 window_height = love.graphics.getPixelHeight()
 
 
-x_speed = 200
-y_speed = 200
+
+-- Requirements
+
+Class = require 'src/class'
+require 'src/Player'
 
 
 function love.load()
-    character = love.graphics.newImage("assets/Character.png")
+    background = love.graphics.newImage("assets/background.png")
+
+
     love.graphics.setDefaultFilter('nearest', 'nearest')
+
+
+    player1 = Player(10, 30)
 
     love.window.setMode(window_width, window_height, {
         vsync = true,
@@ -19,9 +24,6 @@ function love.load()
         resizable = true
     })
 
-    -- set the x and y position for the player
-    x = window_width / 2
-    y = window_height / 2
 
 
 
@@ -36,27 +38,28 @@ end
 
 function love.update(dt)
     if love.keyboard.isDown("s") then
-        y = y + y_speed * dt
+        player1.dy = 200
     end
     if love.keyboard.isDown("w") then
-        y = y - y_speed * dt
+        player1.dy = -200
     end
     if love.keyboard.isDown("d") then
-        x = x + x_speed * dt
+        player1.dx = 200
     end
     if love.keyboard.isDown("a") then
-        x = x - x_speed * dt
+        player1.dx = -200
     end
+    player1.update(dt)
 end
 
 
 -- function that is called every frame to draw something to the screen
 function love.draw()
-    -- start rendering in the virtual resolution
-    -- push:start()
-    love.graphics.draw(character, x, y)
+    -- start rendering
 
-    -- push:finish()
+    love.graphics.draw(background, 0, 0)
+    player1.render()
+
 end
 
 
