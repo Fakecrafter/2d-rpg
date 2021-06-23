@@ -1,3 +1,3 @@
 ### LOST in Space
 
-A pokemon-like 2D rpg written in Lua with löve2D.
+A pokemon-like 2D rpg written in Rust with Bevy.
